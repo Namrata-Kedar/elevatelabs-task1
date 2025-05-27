@@ -1,0 +1,37 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+df=pd.read_csv('KaggleV2-May-2016.csv')
+
+df.head()
+
+print(df.dtypes)
+
+df.info()
+
+df.isnull().sum()
+
+df = df.drop_duplicates()
+
+df['Gender'] = df['Gender'].str.upper().str.strip()
+df['No-show'] = df['No-show'].str.strip().str.title() 
+
+df.head(3)
+
+df['ScheduledDay'] = pd.to_datetime(df['ScheduledDay']).dt.strftime('%d-%m-%Y')
+df['AppointmentDay'] = pd.to_datetime(df['AppointmentDay']).dt.strftime('%d-%m-%Y')
+
+df.head(2)
+
+df.columns = [col.strip().lower().replace(' ', '_') for col in df.columns]
+
+df.head(2)
+
+df['patientid'] = df['patientid'].astype('int64')
+df['scheduledday'] = pd.to_datetime(df['scheduledday'], format='%d-%m-%Y')
+df['appointmentday'] = pd.to_datetime(df['appointmentday'], format='%d-%m-%Y')
+
+df.head(2)
+
